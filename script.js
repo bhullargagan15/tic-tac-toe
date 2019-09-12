@@ -1,4 +1,3 @@
-// make a board
 let board;
 let turn;  
 let winner = "";
@@ -16,19 +15,15 @@ function init() {  //initialize a new session for the game
 function handlePlay(event) { 
   let indexClick = squares.indexOf(event.target);
   if (board[indexClick] === "") {
-
     function switchTurn() {
       (turn === "X") ? turn = "O" : turn = "X";
     }
     board[indexClick] = turn;
-    //update DOM after click
     squares[indexClick].textContent = turn;
-
     winner = checkWinner();
     (winner !== undefined) ? 
     (winner.turn === "T") ? resultPanel.textContent = "Its a Tie!" : 
-    resultPanel.textContent = `${winner.turn} wins!` : switchTurn() ;
-  
+    resultPanel.textContent = `${winner.turn} wins!` : switchTurn();
   }
 }
 
@@ -50,20 +45,18 @@ function checkWinner() {
       }
     }
   tieChecker = board.every(box => {return box !== ""});
-  // tieChecker ? {turn} = "T" : undefined;
   if (tieChecker) {
     turn = "T";
     return {turn};
   }
-  
 }
 
 function resetBoard() {
   init();
   squares.forEach(square => {square.textContent = "";});
   resultPanel.textContent = "result will be shown here";
-
 }
+
 init();
 
 const squares = Array.from(document.querySelectorAll(".board div"));
