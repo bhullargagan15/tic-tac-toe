@@ -2,6 +2,7 @@
 let board;
 let turn;  
 let winner = "";
+let tieChecker;
 
 function init() {  //initialize a new session for the game
   turn = "X"; //initial marker "X" for player1
@@ -10,12 +11,6 @@ function init() {  //initialize a new session for the game
     "", "", "",
     "", "", ""
   ];
- 
-  // function render() {
-  //   board.forEach(function(mark, index) {
-  //     console.log(mark, index);
-  //   });
-  // }
 }
 
 function handlePlay(event) { 
@@ -30,7 +25,9 @@ function handlePlay(event) {
     squares[indexClick].textContent = turn;
 
     winner = checkWinner();
-    (winner !== undefined) ? resultPanel.textContent = `${winner.turn} wins!` : switchTurn();
+    (winner !== undefined) ? 
+    (winner.turn === "T") ? resultPanel.textContent = "Its a Tie!" : 
+    resultPanel.textContent = `${winner.turn} wins!` : switchTurn() ;
   
   }
 }
@@ -46,13 +43,19 @@ function checkWinner() {
     [0,4,8],
     [2,4,6]
   ];
-  
   for (let combo of winningCombos) {
     if (board[combo[0]] && board[combo[0]] === board[combo[1]]
       && board[combo[0]] === board[combo[2]]) {
-      return {turn};
+        return {turn};
+      }
     }
+  tieChecker = board.every(box => {return box !== ""});
+  // tieChecker ? {turn} = "T" : undefined;
+  if (tieChecker) {
+    turn = "T";
+    return {turn};
   }
+  
 }
 
 function resetBoard() {
