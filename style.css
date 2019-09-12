@@ -21,9 +21,29 @@ main {
   display: flex;
 }
 
+aside {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+
+}
+
+button[type="reset"] {
+  margin-bottom: 15px;
+}
+
+.result {
+  font-size: 2rem;
+  text-align: center;
+}
+
 .board > div {
-  height: 150px;
-  width: 150px;
+  min-width: 150px;
+  min-height: 150px;
+  height: 100%;
+  width: 100%;
   background-color: cornflowerblue;
   border: 2px solid darkolivegreen;
   font-size: 8rem;
@@ -32,11 +52,27 @@ main {
   align-items: center;
 }
 
+.board-container {
+  flex: 4;
+}
+
 .board {
+  margin: 0 3rem;
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(3, 1fr);
 }
 
+@media (min-width: 800px) {
+  .board {
+    margin: 0 5rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .board {
+    margin: 0 8rem 0 4rem;
+  }
+}
 
 
